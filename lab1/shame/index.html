@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,11 +8,24 @@
 		<script src="shame.js" defer></script>
 	</head>
 	<body>
-		<div>
-			<button id="1">X</button>
-			<input type="number" name="a" id="a" placeholder="0" />
+		<div class="wrapper">
+			<div class="add-input-btn-container">
+				<button class="btn add-input-btn">Dodaj pole</button>
+			</div>
+			<div class="value-input-container">
+				<button class="btn remove-input-btn">X</button>
+				<input class="value-input" type="number" placeholder="0" value="0" />
+			</div>
+			<div class="value-input-container">
+				<button class="btn remove-input-btn">X</button>
+				<input class="value-input" type="number" placeholder="0" value="0" />
+			</div>
+			<div class="value-input-container">
+				<button class="btn remove-input-btn">X</button>
+				<input class="value-input" type="number" placeholder="0" value="0" />
+			</div>
+			<button class="btn" id="calculate-btn">Przelicz</button>
+			<div id="result"></div>
 		</div>
-		<button id="btn">Przelicz</button>
-		<div id="result"></div>
 	</body>
 </html>

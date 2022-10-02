@@ -1,6 +1,6 @@
-const inputs = document.querySelectorAll('input');
+const inputs = document.querySelectorAll('.vale-input-container .value-input');
 const resultElement = document.getElementById('result');
-const btn = document.getElementById('btn');
+const btn = document.getElementById('calculate-btn');
 
 const result = () => {
 	let numbers = Array.from(inputs);
@@ -33,13 +33,13 @@ const createResultOnPage = (args) => {
 	if (!resultElement.hasChildNodes()) {
 		for (let i = 0; i < args.length; i++) {
 			let span = document.createElement('span');
+			span.classList.add('result__item');
 			span.textContent = ` ${args[i].name}=${args[i].value} `;
 			span.style.display = 'block';
 			resultElement.appendChild(span);
 		}
-		return;
 	} else {
-		let spans = document.querySelectorAll('span');
+		let spans = document.querySelectorAll('.result__item');
 		spans.forEach((span) => {
 			span.remove();
 		});
