@@ -21,15 +21,35 @@ const result = () => {
 
 	console.log(sum, avg, min, max);
 
-	createResultOnPage([sum, avg, min, max]);
+	createResultOnPage([
+		{ name: 'sum', value: sum },
+		{ name: 'avg', value: avg },
+		{ name: 'min', value: min },
+		{ name: 'max', value: max },
+	]);
 };
 
-const createResultOnPage = (...args) => {
-	for (let i = 0; i < args.length; i++) {
-		let span = document.createElement('span');
-		span.textContent = args[i];
-		resultElement.appendChild(span);
+const createResultOnPage = (args) => {
+	if (!resultElement.hasChildNodes()) {
+		for (let i = 0; i < args.length; i++) {
+			let span = document.createElement('span');
+			span.textContent = ` ${args[i].name}=${args[i].value} `;
+			span.style.display = 'block';
+			resultElement.appendChild(span);
+		}
+		return;
+	} else {
+		let spans = document.querySelectorAll('span');
+		spans.forEach((span) => {
+			span.remove();
+		});
+
+		return createResultOnPage(args);
 	}
 };
 
 btn.addEventListener('click', result);
+
+inputs.forEach((input) => {
+	input.addEventListener('keydown', result);
+});
