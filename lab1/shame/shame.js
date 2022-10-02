@@ -1,21 +1,24 @@
-const inputs = document.querySelectorAll('.vale-input-container .value-input');
+let inputs = document.querySelectorAll('.value-input');
 const resultElement = document.getElementById('result');
+
+const valueInputContainer = document.querySelector('.value-input-container');
+const addInputBtn = document.querySelector('.add-input-btn');
 const btn = document.getElementById('calculate-btn');
 
 const result = () => {
-	let numbers = Array.from(inputs);
-	numbers = numbers.map((x) => Number.parseInt(x.value));
-
 	let sum = 0;
 	let avg = 0;
 	let min = 0;
 	let max = 0;
 
+	let numbers = Array.from(inputs);
+	numbers = numbers.map((x) => Number.parseInt(x.value));
+
 	numbers.forEach((number) => {
 		sum += number;
 	});
 
-	avg = sum / numbers.length;
+	avg = Math.floor(sum / numbers.length);
 	min = Math.min(...numbers);
 	max = Math.max(...numbers);
 
@@ -34,7 +37,7 @@ const createResultOnPage = (args) => {
 		for (let i = 0; i < args.length; i++) {
 			let span = document.createElement('span');
 			span.classList.add('result__item');
-			span.textContent = ` ${args[i].name}=${args[i].value} `;
+			span.textContent = ` ${args[i].name}= ${args[i].value} `;
 			span.style.display = 'block';
 			resultElement.appendChild(span);
 		}
@@ -48,8 +51,28 @@ const createResultOnPage = (args) => {
 	}
 };
 
-btn.addEventListener('click', result);
+const addInputOnPage = () => {
+	const div = document.createElement('div');
+	div.classList.add('value-input-container');
 
-inputs.forEach((input) => {
+	const btn = document.createElement('button');
+	btn.classList.add('remove-input-btn');
+	btn.textContent = 'X';
+
+	const input = document.createElement('input');
+	input.type = 'number';
+	input.classList.add('value-input');
+	input.placeholder = '0';
+	input.value = '0';
+
+	valueInputContainer.appendChild(div);
+	div.append(btn, input);
+
+	inputs = document.querySelectorAll('.value-input');
+};
+
+btn.addEventListener('click', result);
+addInputBtn.addEventListener('click', addInputOnPage);
+document.querySelectorAll('.value-input').forEach((input) => {
 	input.addEventListener('keydown', result);
 });

@@ -6,26 +6,93 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Shame</title>
 		<script src="shame.js" defer></script>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #333;
+				height: 100vh;
+			}
+
+			.wrapper {
+				padding: 4rem;
+				border-radius: 20px;
+				background-color: #be1f1f;
+			}
+
+			.app-container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: space-between;
+
+				height: 100%;
+				width: 100%;
+			}
+
+			.btn {
+				width: 80px;
+
+				margin: 2px;
+				padding: 5px;
+
+				font-size: 0.9rem;
+
+				border: none;
+				background-color: #2add19;
+				cursor: pointer;
+			}
+
+			span {
+				color: white;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="wrapper">
-			<div class="add-input-btn-container">
-				<button class="btn add-input-btn">Dodaj pole</button>
+			<div class="app-container">
+				<div class="add-input-btn-container">
+					<button class="btn add-input-btn">Dodaj pole</button>
+				</div>
+				<div class="value-input-container">
+					<div class="value-input-container__item">
+						<button class="remove-input-btn">X</button>
+						<input
+							class="value-input"
+							type="number"
+							placeholder="0"
+							value="0"
+						/>
+					</div>
+					<div class="value-input-container__item">
+						<button class="remove-input-btn">X</button>
+						<input
+							class="value-input"
+							type="number"
+							placeholder="0"
+							value="0"
+						/>
+					</div>
+					<div class="value-input-container__item">
+						<button class="remove-input-btn">X</button>
+						<input
+							class="value-input"
+							type="number"
+							placeholder="0"
+							value="0"
+						/>
+					</div>
+				</div>
+				<button class="btn" id="calculate-btn">Przelicz</button>
+				<div id="result"></div>
 			</div>
-			<div class="value-input-container">
-				<button class="btn remove-input-btn">X</button>
-				<input class="value-input" type="number" placeholder="0" value="0" />
-			</div>
-			<div class="value-input-container">
-				<button class="btn remove-input-btn">X</button>
-				<input class="value-input" type="number" placeholder="0" value="0" />
-			</div>
-			<div class="value-input-container">
-				<button class="btn remove-input-btn">X</button>
-				<input class="value-input" type="number" placeholder="0" value="0" />
-			</div>
-			<button class="btn" id="calculate-btn">Przelicz</button>
-			<div id="result"></div>
 		</div>
 	</body>
 </html>
