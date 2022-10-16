@@ -1,7 +1,6 @@
 let inputs = document.querySelectorAll('.value-input');
 const resultElement = document.getElementById('result');
 
-const valueInputContainer = document.querySelector('.value-input-container');
 const addInputBtn = document.querySelector('.add-input-btn');
 const btn = document.getElementById('calculate-btn');
 
@@ -52,12 +51,28 @@ const createResultOnPage = (args) => {
 };
 
 const addInputOnPage = () => {
+	const valueInputContainer = document.querySelector('.value-input-container');
+
 	const div = document.createElement('div');
-	div.classList.add('value-input-container');
+	div.classList.add('value-input-container__item');
+
+	const existingRmBtns = document.querySelectorAll(
+		'.value-input-container button'
+	);
 
 	const btn = document.createElement('button');
 	btn.classList.add('remove-input-btn');
 	btn.textContent = 'X';
+
+	if (existingRmBtns !== undefined) {
+		let lastRmBtnNumber = +existingRmBtns[existingRmBtns.length - 1].id.replace(
+			'rmbtn',
+			''
+		);
+
+		btn.id = `rmbtn${lastRmBtnNumber + 1}`;
+		div.id = `value-input-container${lastRmBtnNumber + 1}`;
+	}
 
 	const input = document.createElement('input');
 	input.type = 'number';
@@ -71,8 +86,17 @@ const addInputOnPage = () => {
 	inputs = document.querySelectorAll('.value-input');
 };
 
+const removeInput = (e) => {
+	e.path[1].remove();
+};
+
 btn.addEventListener('click', result);
 addInputBtn.addEventListener('click', addInputOnPage);
-document.querySelectorAll('.value-input').forEach((input) => {
-	input.addEventListener('keydown', result);
+document.addEventListener('click', () => {
+	document.querySelectorAll('.remove-input-btn').forEach((item) => {
+		item.addEventListener('click', removeInput);
+	});
+	document.querySelectorAll('.value-input').forEach((input) => {
+		input.addEventListener('keyup', result);
+	});
 });
