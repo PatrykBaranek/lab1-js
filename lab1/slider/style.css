@@ -10,8 +10,10 @@ html {
 
 body {
 	display: flex;
+	height: 100vh;
 	justify-content: center;
 	align-items: center;
+	background-color: #333;
 }
 
 .hide {
@@ -24,6 +26,7 @@ body {
 	width: 900px;
 	height: 600px;
 	overflow: hidden;
+	border-radius: 25px;
 }
 
 .next,
@@ -35,24 +38,34 @@ body {
 	border-radius: 5%;
 	font-size: 4.8rem;
 	color: #ddd;
-	font-weight: 800;
+	font-weight: 600;
 	transform: translateY(-50%);
+	transition-duration: 0.6s;
 	cursor: pointer;
+}
+
+.next:hover,
+.previous:hover {
+	font-weight: 900;
+	font-size: 5rem;
+	transform: scale(1.1) translateY(-50%);
+}
+
+.next:active,
+.previous:active {
+	transform: scale(0.9) translateY(-50%);
 }
 
 .previous {
 	top: 50%;
-	right: 0;
+	left: 0;
 	margin-left: 10px;
 }
 
 .next {
 	top: 50%;
-	left: 0;
+	right: 0;
 	margin-right: 10px;
-}
-
-.slider__item {
 }
 
 img {
