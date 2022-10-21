@@ -27,6 +27,7 @@ body {
 	height: 600px;
 	overflow: hidden;
 	border-radius: 25px;
+	cursor: pointer;
 }
 
 .next,
