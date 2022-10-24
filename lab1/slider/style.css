@@ -73,3 +73,18 @@ img {
 	height: 100%;
 	width: auto;
 }
+
+.fromRightToLeft {
+	animation-duration: 0.2s;
+	animation-name: fromRightToLeft;
+}
+
+@keyframes fromRightToLeft {
+	from {
+		margin-left: 100%;
+	}
+
+	to {
+		margin-left: 0;
+	}
+}

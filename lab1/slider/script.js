@@ -29,10 +29,14 @@ const generateSlider = () => {
 		div.append(img);
 	});
 
+	const sliderDotPositionContainer = sliderPhotoPositionGenerator();
+	slider.append(sliderDotPositionContainer);
+
 	document.querySelector('.slider__item').classList.remove('hide');
 
 	sliderItems = Array.from(document.querySelectorAll('.slider__item'));
 	startAutoPhotoChanger();
+	sliderPhotoPositionChanger(sliderPosition);
 };
 
 const previousPhotoHandler = () => {
@@ -61,10 +65,44 @@ const nextPhotoHandler = (e) => {
 
 	sliderItems[sliderPosition + 1].classList.toggle('hide');
 	sliderPosition++;
+	addAnimationFromRightToLeft(sliderPosition);
+};
+
+// add animation from right to left
+const addAnimationFromRightToLeft = (sliderPosition) => {
+	sliderItems[sliderPosition - 1].classList.toggle('fromRightToLeft');
+	if (sliderPosition === 0) {
+		sliderItems[sliderItems.length - 1].classList.toggle('fromRightToLeft');
+		sliderItems[0].classList.toggle('fromRightToLeft');
+	}
+	sliderItems[sliderPosition].classList.toggle('fromRightToLeft');
 };
 
 const startAutoPhotoChanger = () => {
 	autoPhotoChangerId = setInterval(nextPhotoHandler, 2000);
+};
+
+// dot container
+
+const sliderPhotoPositionGenerator = () => {
+	const sliderDotPositionContainer = document.createElement('div');
+	sliderDotPositionContainer.classList.add('dot-position-container');
+	for (let i = 0; i < images.length; i++) {
+		const imageDot = document.createElement('div');
+		imageDot.classList.add('dot-position-container__item');
+		sliderDotPositionContainer.append(imageDot);
+	}
+
+	return sliderDotPositionContainer;
+};
+
+const sliderPhotoPositionChanger = (sliderPosition) => {
+	const allDotPositionItems = Array.from(
+		document.querySelectorAll('dot-position-container__item')
+	);
+
+	console.log(allDotPositionItems);
+	// allDotPositionItems[sliderPosition].classList.add('active-photo-position');
 };
 
 // slider generator
