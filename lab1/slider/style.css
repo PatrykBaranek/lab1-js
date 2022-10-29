@@ -75,8 +75,13 @@ img {
 }
 
 .fromRightToLeft {
-	animation-duration: 0.2s;
+	animation-duration: 0.3s;
 	animation-name: fromRightToLeft;
+}
+
+.fromLeftToRight {
+	animation-duration: 0.3s;
+	animation-name: fromLeftToRight;
 }
 
 @keyframes fromRightToLeft {
@@ -86,5 +91,15 @@ img {
 
 	to {
 		margin-left: 0;
+	}
+}
+
+@keyframes fromLeftToRight {
+	from {
+		transform: translateX(-100%);
+	}
+
+	to {
+		transform: translateX(0);
 	}
 }

@@ -3,6 +3,8 @@ const images = [
 	'https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649_960_720.jpg',
 	'https://cdn.pixabay.com/photo/2016/11/21/00/47/view-1844110_960_720.jpg',
 	'https://cdn.pixabay.com/photo/2016/11/01/10/29/dog-1787835_960_720.jpg',
+	'https://cdn.pixabay.com/photo/2016/11/01/10/29/dog-1787835_960_720.jpg',
+	'https://cdn.pixabay.com/photo/2016/11/01/10/29/dog-1787835_960_720.jpg',
 	'https://cdn.benchmark.pl/uploads/backend_img/c/recenzje/2022_10/12505_God_of_War_historia_Kratosa/GoW_Fenrir.jpg',
 	'https://preview.redd.it/p2ucani1xid81.jpg?width=640&crop=smart&auto=webp&s=cabafc1ce571ac8788fed4744305476a072d5133',
 	'https://whatifgaming.com/wp-content/uploads/2022/09/god-of-ragnarok.jpg',
@@ -46,36 +48,54 @@ const previousPhotoHandler = () => {
 		sliderPosition = sliderItems.length - 1;
 		sliderItems[0].classList.add('hide');
 		sliderItems[sliderPosition].classList.toggle('hide');
+		addAnimationFromLeftToRight();
 		return;
 	}
 
 	sliderItems[sliderPosition + 1].classList.toggle('hide');
 	sliderItems[sliderPosition].classList.toggle('hide');
+	addAnimationFromLeftToRight();
 };
 
-const nextPhotoHandler = (e) => {
+const nextPhotoHandler = () => {
 	sliderItems[sliderPosition].classList.toggle('hide');
 
 	if (sliderPosition + 1 > sliderItems.length - 1) {
 		sliderPosition = 0;
 		sliderItems[sliderPosition].classList.remove('hide');
 		sliderItems[sliderItems.length - 1].classList.add('hide');
+		addAnimationFromRightToLeft();
 		return;
 	}
 
 	sliderItems[sliderPosition + 1].classList.toggle('hide');
 	sliderPosition++;
-	addAnimationFromRightToLeft(sliderPosition);
+	addAnimationFromRightToLeft();
 };
 
-// add animation from right to left
-const addAnimationFromRightToLeft = (sliderPosition) => {
-	sliderItems[sliderPosition - 1].classList.toggle('fromRightToLeft');
-	if (sliderPosition === 0) {
-		sliderItems[sliderItems.length - 1].classList.toggle('fromRightToLeft');
-		sliderItems[0].classList.toggle('fromRightToLeft');
-	}
-	sliderItems[sliderPosition].classList.toggle('fromRightToLeft');
+// clear animation
+const FROM_RIGHT_TO_LEFT_ANIMATION = 'fromRightToLeft';
+const FROM_LEFT_TO_RIGHT_ANIMATION = 'fromLeftToRight';
+
+const clearAnimation = () => {
+	sliderItems.forEach((item) => {
+		item.classList.remove(FROM_LEFT_TO_RIGHT_ANIMATION);
+		item.classList.remove(FROM_RIGHT_TO_LEFT_ANIMATION);
+	});
+};
+
+// animation from right to left
+const addAnimationFromRightToLeft = () => {
+	clearAnimation();
+
+	sliderItems[sliderPosition].classList.toggle(FROM_RIGHT_TO_LEFT_ANIMATION);
+};
+
+// animation from left to right
+const addAnimationFromLeftToRight = () => {
+	clearAnimation();
+
+	sliderItems[sliderPosition].classList.toggle(FROM_LEFT_TO_RIGHT_ANIMATION);
 };
 
 const startAutoPhotoChanger = () => {
