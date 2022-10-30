@@ -127,11 +127,19 @@ const activeDotChanger = () => {
 document.addEventListener('DOMContentLoaded', generateSlider);
 
 // turn on and off autoPhotoChanger
-document.querySelector('.slider').addEventListener('mouseover', () => {
+const pauseBtn = document.querySelector('.fa-pause');
+const playBtn = document.querySelector('.fa-play');
+
+pauseBtn.addEventListener('click', () => {
 	clearInterval(autoPhotoChangerId);
+	playBtn.classList.remove('hide');
+	pauseBtn.classList.add('hide');
 });
-document.querySelector('.slider').addEventListener('mouseleave', () => {
+
+playBtn.addEventListener('click', () => {
 	startAutoPhotoChanger();
+	playBtn.classList.add('hide');
+	pauseBtn.classList.remove('hide');
 });
 
 // change photo by click

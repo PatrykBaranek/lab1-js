@@ -5,13 +5,24 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Slider</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+			integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
 		<div class="slider">
-			<div class="next">></div>
-			<div class="previous"><</div>
+			<div class="next"><span>></span></div>
+			<div class="previous"><span><</span></div>
 			<div class="image-order"></div>
+			<div class="pause-play-container">
+				<i class="fa-solid fa-pause"></i>
+				<i class="fa-solid fa-play hide"></i>
+			</div>
 		</div>
 		<script src="script.js"></script>
 	</body>
