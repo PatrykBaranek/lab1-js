@@ -22,6 +22,7 @@ body {
 
 .slider {
 	display: flex;
+	justify-content: center;
 	position: relative;
 	width: 900px;
 	height: 600px;
@@ -108,22 +109,24 @@ img {
 
 /* Animation */
 .fromRightToLeft {
+	animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
 	animation-duration: 0.3s;
 	animation-name: fromRightToLeft;
 }
 
 .fromLeftToRight {
+	animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
 	animation-duration: 0.3s;
 	animation-name: fromLeftToRight;
 }
 
 @keyframes fromRightToLeft {
 	from {
-		margin-left: 100%;
+		transform: translateX(100%);
 	}
 
 	to {
-		margin-left: 0;
+		transform: translateX(0);
 	}
 }
 

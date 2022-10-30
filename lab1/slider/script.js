@@ -3,7 +3,6 @@ const images = [
 	'https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649_960_720.jpg',
 	'https://cdn.pixabay.com/photo/2016/11/21/00/47/view-1844110_960_720.jpg',
 	'https://cdn.pixabay.com/photo/2016/11/01/10/29/dog-1787835_960_720.jpg',
-	'https://cdn.pixabay.com/photo/2016/11/01/10/29/dog-1787835_960_720.jpg',
 ];
 
 let sliderPosition = 0;
