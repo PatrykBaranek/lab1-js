@@ -39,6 +39,12 @@ const generateSlider = () => {
 const addAnimationDotChangerAndInterval = (animationDirection = '') => {
 	addAnimation(animationDirection);
 	activeDotChanger();
+
+	if (pauseBtn.classList.contains('hide')) {
+		stopAutoPhotoChanger();
+		return;
+	}
+
 	startAutoPhotoChanger();
 };
 
