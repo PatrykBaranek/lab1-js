@@ -7,6 +7,7 @@ const images = [
 
 let sliderPosition = 0;
 let sliderItems = [];
+let dots = [];
 let autoPhotoChangerId;
 
 // slider generator
@@ -31,44 +32,48 @@ const generateSlider = () => {
 	document.querySelector('.slider__item').classList.remove('hide');
 
 	sliderItems = [...document.querySelectorAll('.slider__item')];
-	startAutoPhotoChanger();
+
+	addAnimationDotChangerAndInterval('next');
+};
+
+const addAnimationDotChangerAndInterval = (animationDirection = '') => {
+	addAnimation(animationDirection);
 	activeDotChanger();
+	startAutoPhotoChanger();
 };
 
 const previousPhotoHandler = () => {
+	clearInterval(autoPhotoChangerId);
 	--sliderPosition;
 
 	if (sliderPosition < 0) {
 		sliderPosition = sliderItems.length - 1;
 		sliderItems[0].classList.add('hide');
 		sliderItems[sliderPosition].classList.toggle('hide');
-		addAnimation();
-		activeDotChanger();
+		addAnimationDotChangerAndInterval('previous');
 		return;
 	}
 
 	sliderItems[sliderPosition + 1].classList.toggle('hide');
 	sliderItems[sliderPosition].classList.toggle('hide');
-	addAnimation();
-	activeDotChanger();
+	addAnimationDotChangerAndInterval('previous');
 };
 
 const nextPhotoHandler = () => {
+	clearInterval(autoPhotoChangerId);
 	sliderItems[sliderPosition].classList.toggle('hide');
 
 	if (sliderPosition + 1 > sliderItems.length - 1) {
 		sliderPosition = 0;
 		sliderItems[sliderPosition].classList.remove('hide');
 		sliderItems[sliderItems.length - 1].classList.add('hide');
-		addAnimation('next');
-		activeDotChanger();
+		addAnimationDotChangerAndInterval('next');
 		return;
 	}
 
 	sliderItems[sliderPosition + 1].classList.toggle('hide');
 	sliderPosition++;
-	addAnimation('next');
-	activeDotChanger();
+	addAnimationDotChangerAndInterval('next');
 };
 
 // clear animation
@@ -89,9 +94,9 @@ const addAnimation = (direction) => {
 	if (direction === 'next') {
 		sliderItems[sliderPosition].classList.toggle(FROM_RIGHT_TO_LEFT_ANIMATION);
 		return;
+	} else if (direction === 'previous') {
+		sliderItems[sliderPosition].classList.toggle(FROM_LEFT_TO_RIGHT_ANIMATION);
 	}
-
-	sliderItems[sliderPosition].classList.toggle(FROM_LEFT_TO_RIGHT_ANIMATION);
 };
 
 const startAutoPhotoChanger = () => {
@@ -114,7 +119,7 @@ const sliderPhotoPositionGenerator = () => {
 };
 
 const activeDotChanger = () => {
-	const dots = [...document.querySelectorAll('.dot-position-container__item')];
+	dots = [...document.querySelectorAll('.dot-position-container__item')];
 
 	dots.forEach((dot) => {
 		dot.classList.remove('active-photo-position');
