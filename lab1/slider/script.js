@@ -43,7 +43,7 @@ const addAnimationDotChangerAndInterval = (animationDirection = '') => {
 };
 
 const previousPhotoHandler = () => {
-	clearInterval(autoPhotoChangerId);
+	stopAutoPhotoChanger();
 	--sliderPosition;
 
 	if (sliderPosition < 0) {
@@ -60,7 +60,7 @@ const previousPhotoHandler = () => {
 };
 
 const nextPhotoHandler = () => {
-	clearInterval(autoPhotoChangerId);
+	stopAutoPhotoChanger();
 	sliderItems[sliderPosition].classList.toggle('hide');
 
 	if (sliderPosition + 1 > sliderItems.length - 1) {
@@ -103,6 +103,10 @@ const startAutoPhotoChanger = () => {
 	autoPhotoChangerId = setInterval(nextPhotoHandler, 2000);
 };
 
+const stopAutoPhotoChanger = () => {
+	clearInterval(autoPhotoChangerId);
+};
+
 // dot container
 
 const sliderPhotoPositionGenerator = () => {
@@ -136,7 +140,7 @@ const pauseBtn = document.querySelector('.fa-pause');
 const playBtn = document.querySelector('.fa-play');
 
 pauseBtn.addEventListener('click', () => {
-	clearInterval(autoPhotoChangerId);
+	stopAutoPhotoChanger();
 	playBtn.classList.remove('hide');
 	pauseBtn.classList.add('hide');
 });
