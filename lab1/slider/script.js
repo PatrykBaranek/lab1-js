@@ -145,17 +145,20 @@ document.addEventListener('DOMContentLoaded', generateSlider);
 const pauseBtn = document.querySelector('.fa-pause');
 const playBtn = document.querySelector('.fa-play');
 
-pauseBtn.addEventListener('click', () => {
+const pauseBtnAutoChanger = () => {
 	stopAutoPhotoChanger();
 	playBtn.classList.remove('hide');
 	pauseBtn.classList.add('hide');
-});
+};
 
-playBtn.addEventListener('click', () => {
+const playBtnAutoChanger = () => {
 	startAutoPhotoChanger();
 	playBtn.classList.add('hide');
 	pauseBtn.classList.remove('hide');
-});
+};
+
+pauseBtn.addEventListener('click', pauseBtnAutoChanger);
+playBtn.addEventListener('click', playBtnAutoChanger);
 
 // change photo by click
 document
@@ -163,3 +166,20 @@ document
 	.addEventListener('click', previousPhotoHandler);
 
 document.querySelector('.next').addEventListener('click', nextPhotoHandler);
+
+// change photo by keys
+
+document.addEventListener('keyup', (e) => {
+	console.log(e);
+	if (e.key === 'ArrowLeft') {
+		previousPhotoHandler();
+	} else if (e.key === 'ArrowRight') {
+		nextPhotoHandler();
+	} else if (e.code === 'Space') {
+		if (pauseBtn.classList.contains('hide')) {
+			playBtnAutoChanger();
+			return;
+		}
+		pauseBtnAutoChanger();
+	}
+});
