@@ -1,5 +1,7 @@
 import { Color, INote } from '../types/types';
 
+const notes: Note[] = [];
+
 export class Note implements INote {
 	public title: string;
 	public description: string;
@@ -11,13 +13,23 @@ export class Note implements INote {
 		title: string,
 		description: string,
 		color: Color,
-		isPined: boolean,
-		createdAt: Date
+		isPined: boolean
 	) {
 		this.title = title;
 		this.description = description;
 		this.color = color;
 		this.isPined = isPined;
-		this.createdAt = createdAt;
+		this.createdAt = new Date();
+	}
+
+	public static createNewNote(note: Note) {
+		notes.push(note);
+		localStorage.setItem(note.title, JSON.stringify(note));
+
+		return localStorage.getItem(note.title);
+	}
+
+	public static getAllNotes() {
+		return notes;
 	}
 }

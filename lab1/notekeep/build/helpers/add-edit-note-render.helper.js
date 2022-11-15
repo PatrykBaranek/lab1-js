@@ -1,4 +1,3 @@
-"use strict";
 // <!-- Rendering component -->
 // 			<!-- <form>
 // 				<div>
@@ -8,4 +7,4 @@
 // 				<button>Add Note</button>
 // 			</form> -->
 // Create render method which show pop-up component with adding or editing note inputs
-const render = () => { };
+export const render = () => { };

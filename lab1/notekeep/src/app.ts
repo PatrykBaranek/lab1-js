@@ -1,16 +1,21 @@
 import { Note } from './model/Note.js';
 import { Color } from './types/types.js';
+import { render as renderAddNote } from './helpers/add-edit-note-render.helper.js';
 
-const notes: Note[] = [];
-
-const storage: Storage = localStorage;
+const addNoteBtnElement = document.querySelector(
+	'#add-btn'
+) as HTMLButtonElement;
 
 const createNewNote = (note: Note) => {
-	notes.push(note);
-	storage.setItem(String(notes.length), JSON.stringify(note));
-	console.log(notes);
+	const noteObj = new Note(
+		note.title,
+		note.description,
+		note.color,
+		note.isPined
+	);
+	console.log(localStorage.getItem(note.title));
 };
 
-createNewNote(new Note('test', 'test', Color.RED, true, new Date()));
+createNewNote(new Note('test', 'description', Color.BLUE, false));
 
-console.log(storage.getItem(String(1)));
+addNoteBtnElement.addEventListener('click', renderAddNote);
