@@ -1,0 +1,12 @@
+{
+	"name": "notekeep",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"compile": "tsc --watch"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
