@@ -7,15 +7,7 @@ const addNoteBtnElement = document.querySelector(
 ) as HTMLButtonElement;
 
 const createNewNote = (note: Note) => {
-	const noteObj = new Note(
-		note.title,
-		note.description,
-		note.color,
-		note.isPined
-	);
 	console.log(localStorage.getItem(note.title));
 };
-
-createNewNote(new Note('test', 'description', Color.BLUE, false));
 
 addNoteBtnElement.addEventListener('click', renderAddNote);
