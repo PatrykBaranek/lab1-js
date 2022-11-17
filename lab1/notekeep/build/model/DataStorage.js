@@ -1,8 +1,22 @@
 class DataStorage {
-    constructor(key, value) {
-        this.key = key;
-        this.value = value;
+    constructor(value) {
+        this.key = String(localStorage.length);
+        this.value = JSON.stringify(value);
     }
-    static addToLocalStorage(note) { }
+    addToLocalStorage() {
+        localStorage.setItem(this.key, this.value);
+    }
+    RemoveItem() {
+        localStorage.removeItem(this.key);
+    }
+    static RemoveAll() {
+        localStorage.clear();
+    }
+    static RemoveItemWithKey(key) {
+        if (localStorage.getItem(String(key))) {
+            localStorage.removeItem(String(key));
+        }
+        return 'Not Found Item';
+    }
 }
 export {};
