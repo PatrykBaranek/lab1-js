@@ -1,7 +1,7 @@
 export var Color;
 (function (Color) {
-    Color["RED"] = "red";
-    Color["BLUE"] = "blue";
-    Color["YELLOW"] = "yellow";
-    Color["GREEN"] = "green";
+    Color["RED"] = "#FF0000";
+    Color["BLUE"] = "#0000FF";
+    Color["YELLOW"] = "#FFFF00";
+    Color["GREEN"] = "#008000";
 })(Color || (Color = {}));

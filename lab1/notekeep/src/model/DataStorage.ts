@@ -1,6 +1,6 @@
 import { Note } from './Note';
 
-class DataStorage {
+export class DataStorage {
 	private key: string;
 	private value: string;
 

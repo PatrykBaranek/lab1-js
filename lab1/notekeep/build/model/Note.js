@@ -7,12 +7,6 @@ export class Note {
         this.isPined = isPined;
         this.createdAt = new Date();
     }
-    static getAllProperties() {
-        const properites = Object.keys(Note).map((key) => {
-            return key;
-        });
-        return properites;
-    }
     static createNewNote(note) {
         notes.push(note);
         localStorage.setItem(note.title, JSON.stringify(note));

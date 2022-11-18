@@ -21,14 +21,6 @@ export class Note implements INote {
 		this.createdAt = new Date();
 	}
 
-	public static getAllProperties() {
-		const properites: Array<string> = Object.keys(Note).map((key) => {
-			return key;
-		});
-
-		return properites;
-	}
-
 	public static createNewNote(note: Note) {
 		notes.push(note);
 		localStorage.setItem(note.title, JSON.stringify(note));

@@ -1,13 +1,17 @@
 import { Note } from './model/Note.js';
-import { Color } from './types/types.js';
-import { render as renderAddNote } from './helpers/add-edit-note-render.helper.js';
+import { Color, DataFromForm } from './types/types.js';
+import { DataStorage } from './model/DataStorage.js';
+import {
+	render as renderNoteForm,
+	data,
+} from './helpers/add-edit-note-render.helper.js';
 
 const addNoteBtnElement = document.querySelector(
-	'#add-btn'
+	'#open-add-form'
+) as HTMLButtonElement;
+const editNotBtnElement = document.querySelector(
+	'#open-edit-form'
 ) as HTMLButtonElement;
 
-const createNewNote = (note: Note) => {
-	console.log(localStorage.getItem(note.title));
-};
-
-addNoteBtnElement.addEventListener('click', renderAddNote);
+addNoteBtnElement.addEventListener('click', renderNoteForm);
+editNotBtnElement.addEventListener('click', renderNoteForm);

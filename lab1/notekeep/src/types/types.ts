@@ -1,8 +1,21 @@
 export enum Color {
-	RED = 'red',
-	BLUE = 'blue',
-	YELLOW = 'yellow',
-	GREEN = 'green',
+	RED = '#FF0000',
+	BLUE = '#0000FF',
+	YELLOW = '#FFFF00',
+	GREEN = '#008000',
+}
+
+export interface DataFromForm {
+	title: string;
+	description: string;
+	isPined: boolean;
+	color: string;
+}
+
+export interface InputTypes {
+	inputElement: HTMLInputElement;
+	parentElement: HTMLDivElement;
+	propName: string;
 }
 
 export interface INote {

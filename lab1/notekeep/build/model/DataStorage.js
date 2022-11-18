@@ -1,4 +1,4 @@
-class DataStorage {
+export class DataStorage {
     constructor(value) {
         this.key = String(localStorage.length);
         this.value = JSON.stringify(value);
@@ -19,4 +19,3 @@ class DataStorage {
         return 'Not Found Item';
     }
 }
-export {};
