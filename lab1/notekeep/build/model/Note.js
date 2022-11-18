@@ -1,3 +1,4 @@
+import { DataStorage } from './DataStorage.js';
 const notes = [];
 export class Note {
     constructor(title, description, color, isPined) {
@@ -7,10 +8,11 @@ export class Note {
         this.isPined = isPined;
         this.createdAt = new Date();
     }
-    static createNewNote(note) {
-        notes.push(note);
-        localStorage.setItem(note.title, JSON.stringify(note));
-        return localStorage.getItem(note.title);
+    createNewNote() {
+        notes.push(this);
+        const dataStorage = new DataStorage(this);
+        dataStorage.addToLocalStorage();
+        return dataStorage.getValue();
     }
     static getAllNotes() {
         return notes;

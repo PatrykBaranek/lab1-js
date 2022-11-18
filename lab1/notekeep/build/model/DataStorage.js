@@ -6,8 +6,16 @@ export class DataStorage {
     addToLocalStorage() {
         localStorage.setItem(this.key, this.value);
     }
+    getValue() {
+        return localStorage.getItem(this.key);
+    }
     RemoveItem() {
         localStorage.removeItem(this.key);
+    }
+    static getAllValues() {
+        for (let i = 1; i < localStorage.length; i++) {
+            console.log(localStorage.getItem(String(i)));
+        }
     }
     static RemoveAll() {
         localStorage.clear();

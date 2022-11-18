@@ -1,4 +1,5 @@
-import { Color, INote } from '../types/types';
+import { Color, INote } from '../types/types.js';
+import { DataStorage } from './DataStorage.js';
 
 const notes: Note[] = [];
 export class Note implements INote {
@@ -21,11 +22,13 @@ export class Note implements INote {
 		this.createdAt = new Date();
 	}
 
-	public static createNewNote(note: Note) {
-		notes.push(note);
-		localStorage.setItem(note.title, JSON.stringify(note));
+	public createNewNote() {
+		notes.push(this);
 
-		return localStorage.getItem(note.title);
+		const dataStorage = new DataStorage(this);
+		dataStorage.addToLocalStorage();
+
+		return dataStorage.getValue();
 	}
 
 	public static getAllNotes() {

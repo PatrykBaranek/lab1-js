@@ -1,3 +1,4 @@
+import { DataStorage } from '../model/DataStorage.js';
 import { Note } from '../model/Note.js';
 import { Color, DataFromForm, InputTypes } from '../types/types.js';
 
@@ -139,7 +140,18 @@ const postData = (e: Event) => {
 		title: title.value,
 		description: description.value,
 		isPined: isPined.checked,
-		color: selectedColor.id,
+		color: Object.values(Color).find((x) => x === selectedColor.id) as Color,
 	};
+
+	const newNote = new Note(
+		data.title,
+		data.description,
+		data.color,
+		data.isPined
+	);
+
+	newNote.createNewNote();
+
 	closeAddEditForm();
+	DataStorage.getAllValues();
 };

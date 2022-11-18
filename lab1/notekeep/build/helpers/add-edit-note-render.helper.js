@@ -1,3 +1,4 @@
+import { DataStorage } from '../model/DataStorage.js';
 import { Note } from '../model/Note.js';
 import { Color } from '../types/types.js';
 // Create render method which show pop-up component with adding or editing note inputs
@@ -110,7 +111,10 @@ const postData = (e) => {
         title: title.value,
         description: description.value,
         isPined: isPined.checked,
-        color: selectedColor.id,
+        color: Object.values(Color).find((x) => x === selectedColor.id),
     };
+    const newNote = new Note(data.title, data.description, data.color, data.isPined);
+    newNote.createNewNote();
     closeAddEditForm();
+    DataStorage.getAllValues();
 };

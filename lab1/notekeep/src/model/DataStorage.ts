@@ -1,4 +1,4 @@
-import { Note } from './Note';
+import { Note } from './Note.js';
 
 export class DataStorage {
 	private key: string;
@@ -13,8 +13,18 @@ export class DataStorage {
 		localStorage.setItem(this.key, this.value);
 	}
 
+	public getValue() {
+		return localStorage.getItem(this.key);
+	}
+
 	public RemoveItem() {
 		localStorage.removeItem(this.key);
+	}
+
+	public static getAllValues() {
+		for (let i = 1; i < localStorage.length; i++) {
+			console.log(localStorage.getItem(String(i)));
+		}
 	}
 
 	public static RemoveAll() {

@@ -1,15 +1,15 @@
 export enum Color {
-	RED = '#FF0000',
-	BLUE = '#0000FF',
-	YELLOW = '#FFFF00',
-	GREEN = '#008000',
+	RED = 'RED',
+	BLUE = 'BLUE',
+	YELLOW = 'YELLOW',
+	GREEN = 'GREEN',
 }
 
 export interface DataFromForm {
 	title: string;
 	description: string;
 	isPined: boolean;
-	color: string;
+	color: Color;
 }
 
 export interface InputTypes {
