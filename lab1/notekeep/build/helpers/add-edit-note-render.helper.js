@@ -1,25 +1,29 @@
-// <!-- Rendering component -->
-// 			<!-- <form>
-// 				<div>
-// 					<input type="text" name="add-note" id="add-note" />
-// 					<label for="add-note"></label>
-// 				</div>
-// 				<button>Add Note</button>
-// 			</form> -->
 import { Note } from '../model/Note.js';
 import { Color } from '../types/types.js';
 // Create render method which show pop-up component with adding or editing note inputs
-const noteInstance = new Note('test', 'descripiton', Color.BLUE, true);
-const noteProps = Object.getOwnPropertyNames(noteInstance);
+const menuDivContainer = document.querySelector('.menu-container');
+let divFormContainerElement;
 export const render = () => {
-    const menuDivContainer = document.querySelector('.menu-container');
+    if (menuDivContainer.hasAttribute('filled')) {
+        return;
+    }
+    divFormContainerElement = document.createElement('div');
+    divFormContainerElement.classList.add('form-container');
+    const closeFormBtn = document.createElement('button');
+    closeFormBtn.textContent = 'X';
+    const formElement = renderAllFields();
     const buttonElement = document.createElement('button');
     buttonElement.textContent = 'Add Note';
-    const formElement = renderAllFields();
+    menuDivContainer.appendChild(divFormContainerElement);
+    divFormContainerElement.appendChild(closeFormBtn);
+    divFormContainerElement.appendChild(formElement);
     formElement.appendChild(buttonElement);
-    menuDivContainer.appendChild(formElement);
+    closeFormBtn.addEventListener('click', closeAddEditForm);
+    menuDivContainer.setAttribute('filled', String(true));
 };
 const renderAllFields = () => {
+    const noteInstance = new Note('test', 'descripiton', Color.BLUE, true);
+    const noteProps = Object.getOwnPropertyNames(noteInstance);
     const formElement = document.createElement('form');
     noteProps.forEach((propName) => {
         const divElement = document.createElement('div');
@@ -27,13 +31,18 @@ const renderAllFields = () => {
         const labelElmenet = document.createElement('label');
         formElement.appendChild(divElement);
         divElement.classList.add(`div-${propName}`);
-        divElement.appendChild(inputElement);
-        inputElement.classList.add(`input-${propName}`);
         divElement.appendChild(labelElmenet);
         labelElmenet.classList.add(`label-${propName}`);
-        // inputElement.name = `${propName}`;
-        // inputElement.id = `${propName}`;
-        // labelElmenet.setAttribute('for', `${propName}`);
+        divElement.appendChild(inputElement);
+        inputElement.classList.add(`input-${propName}`);
+        inputElement.name = `${propName}`;
+        inputElement.id = `${propName}`;
+        labelElmenet.textContent = propName + ' : ';
+        labelElmenet.setAttribute('for', `${propName}`);
     });
     return formElement;
+};
+const closeAddEditForm = () => {
+    menuDivContainer.removeAttribute('filled');
+    divFormContainerElement.remove();
 };
