@@ -1,13 +1,12 @@
 import { Color, INote } from '../types/types.js';
 import { DataStorage } from './DataStorage.js';
 
-const notes: Note[] = [];
 export class Note implements INote {
 	public title: string;
 	public description: string;
 	public color: Color;
 	public isPined: boolean;
-	public createdAt: Date;
+	public createdAt: string;
 
 	constructor(
 		title: string,
@@ -19,12 +18,10 @@ export class Note implements INote {
 		this.description = description;
 		this.color = color;
 		this.isPined = isPined;
-		this.createdAt = new Date();
+		this.createdAt = new Date().toLocaleString();
 	}
 
 	public createNewNote() {
-		notes.push(this);
-
 		const dataStorage = new DataStorage(this);
 		dataStorage.addToLocalStorage();
 
@@ -32,6 +29,7 @@ export class Note implements INote {
 	}
 
 	public static getAllNotes() {
+		const notes = DataStorage.getAllValues();
 		return notes;
 	}
 }

@@ -23,5 +23,5 @@ export interface INote {
 	description: string;
 	color: Color;
 	isPined: boolean;
-	createdAt: Date;
+	createdAt: string;
 }

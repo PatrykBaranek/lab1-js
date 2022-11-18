@@ -22,9 +22,11 @@ export class DataStorage {
 	}
 
 	public static getAllValues() {
+		const notes: string[] = [];
 		for (let i = 1; i < localStorage.length; i++) {
-			console.log(localStorage.getItem(String(i)));
+			notes.push(localStorage.getItem(String(i)) as string);
 		}
+		return notes;
 	}
 
 	public static RemoveAll() {

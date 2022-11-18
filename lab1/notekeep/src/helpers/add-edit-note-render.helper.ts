@@ -1,10 +1,11 @@
 import { DataStorage } from '../model/DataStorage.js';
 import { Note } from '../model/Note.js';
 import { Color, DataFromForm, InputTypes } from '../types/types.js';
+import { render as renderNotes } from '../helpers/notes-render.helper.js';
 
 // Create render method which show pop-up component with adding or editing note inputs
 
-export let data: DataFromForm;
+let data: DataFromForm;
 const menuDivContainer = document.querySelector(
 	'.menu-container'
 ) as HTMLDivElement;
@@ -41,7 +42,7 @@ export const render = (e: Event) => {
 
 	buttonElement.addEventListener('click', postData);
 	buttonElement.addEventListener('click', () => {
-		console.log(data);
+		renderNotes();
 	});
 };
 
@@ -153,5 +154,4 @@ const postData = (e: Event) => {
 	newNote.createNewNote();
 
 	closeAddEditForm();
-	DataStorage.getAllValues();
 };

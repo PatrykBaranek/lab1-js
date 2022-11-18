@@ -13,9 +13,11 @@ export class DataStorage {
         localStorage.removeItem(this.key);
     }
     static getAllValues() {
+        const notes = [];
         for (let i = 1; i < localStorage.length; i++) {
-            console.log(localStorage.getItem(String(i)));
+            notes.push(localStorage.getItem(String(i)));
         }
+        return notes;
     }
     static RemoveAll() {
         localStorage.clear();
