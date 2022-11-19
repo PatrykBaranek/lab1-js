@@ -1,12 +1,14 @@
 import { DataStorage } from '../model/DataStorage.js';
 import { INote } from '../types/types.js';
 
-const notesContainerElement = document.querySelector(
+let notesContainerElement = document.querySelector(
 	'.note-container'
 ) as HTMLDivElement;
 
 export const render = () => {
-	let notes: INote[] = DataStorage.getAllValues().map((x) => JSON.parse(x));
+	const notes: INote[] = DataStorage.getAllValues().map<INote>((x) =>
+		JSON.parse(x)
+	);
 
 	notes.forEach((note, index) => {
 		const divElement = document.createElement('div');
@@ -16,6 +18,7 @@ export const render = () => {
 
 		divElement.style.backgroundColor = note.color;
 		divElement.id = String(index);
+		divElement.classList.add('note');
 		titleSpan.textContent = note.title;
 		descriptionSpan.textContent = note.description;
 		createdAtSpan.textContent = note.createdAt;
@@ -23,6 +26,4 @@ export const render = () => {
 		divElement.append(titleSpan, descriptionSpan, createdAtSpan);
 		notesContainerElement.appendChild(divElement);
 	});
-
-	notes = [];
 };

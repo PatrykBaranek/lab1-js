@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"rootDir": "./src",
-		"outDir": "./build",
+		"outDir": "./public",
 		"target": "es2017",
 		"module": "ES2015",
 		"esModuleInterop": true,

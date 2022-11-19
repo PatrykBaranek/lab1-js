@@ -10,17 +10,17 @@ export const render = (e) => {
         return;
     }
     divFormContainerElement = document.createElement('div');
-    divFormContainerElement.classList.add('form-container');
-    const closeFormBtn = document.createElement('button');
-    closeFormBtn.textContent = 'X';
-    closeFormBtn.id = 'close-form-btn';
     const formElement = renderAllFields();
-    formElement.id = 'add-form';
+    const closeFormBtn = document.createElement('button');
     const buttonElement = document.createElement('button');
+    formElement.id = 'add-form';
+    closeFormBtn.id = 'close-form-btn';
+    closeFormBtn.innerHTML = '&times;';
+    divFormContainerElement.classList.add('form-container');
     buttonElement.classList.add(`form-container__btnAdd`);
     if (e.target instanceof HTMLButtonElement) {
-        const buttonType = e.target;
-        buttonElement.textContent = buttonType.textContent;
+        const buttonType = e.target.textContent;
+        buttonElement.textContent = buttonType;
     }
     menuDivContainer.appendChild(divFormContainerElement);
     divFormContainerElement.appendChild(closeFormBtn);
@@ -28,8 +28,8 @@ export const render = (e) => {
     formElement.appendChild(buttonElement);
     menuDivContainer.setAttribute('filled', String(true));
     closeFormBtn.addEventListener('click', closeAddEditForm);
-    buttonElement.addEventListener('click', postData);
-    buttonElement.addEventListener('click', () => {
+    buttonElement.addEventListener('click', (e) => {
+        postData(e);
         renderNotes();
     });
 };
@@ -38,13 +38,13 @@ const renderAllFields = () => {
     const noteProps = Object.getOwnPropertyNames(noteInstance);
     const formElement = document.createElement('form');
     noteProps.forEach((propName) => {
-        if (propName === 'createdAt') {
+        if (propName === 'createdAt' || propName === 'id') {
             return;
         }
         const divElement = document.createElement('div');
         const inputElement = document.createElement('input');
         const labelElmenet = document.createElement('label');
-        const colorInputs = inputTypeChanger({
+        const colorInputs = renderInputs({
             inputElement: inputElement,
             parentElement: divElement,
             propName: propName,
@@ -63,26 +63,30 @@ const renderAllFields = () => {
         inputElement.id = propName;
         inputElement.name = `${propName}`;
         inputElement.id = `${propName}`;
+        inputElement.setAttribute('required', 'required');
         labelElmenet.textContent = propName + ' : ';
         labelElmenet.setAttribute('for', `${propName}`);
     });
     return formElement;
 };
-const inputTypeChanger = (data) => {
+const renderInputs = (data) => {
     switch (data.propName) {
         case 'color':
             const colorInputArray = [];
             const colorKeyArray = Object.keys(Color);
             for (let i = 0; i < colorKeyArray.length; i++) {
+                const inputLabelContainer = document.createElement('div');
                 const newInputElement = document.createElement('input');
                 const newSpanElement = document.createElement('span');
+                inputLabelContainer.classList.add('color-input-label-container', `input-label-${colorKeyArray[i].toLowerCase()}`);
                 newInputElement.classList.add('input-color');
                 newInputElement.type = 'checkbox';
                 newInputElement.id = `${colorKeyArray[i]}`;
                 newInputElement.name = 'color';
+                newInputElement.setAttribute('required', 'required');
                 newSpanElement.textContent = colorKeyArray[i];
-                colorInputArray.push(newSpanElement);
-                colorInputArray.push(newInputElement);
+                inputLabelContainer.append(newSpanElement, newInputElement);
+                colorInputArray.push(inputLabelContainer);
             }
             return colorInputArray;
         case 'isPined':
