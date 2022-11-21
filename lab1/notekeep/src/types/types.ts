@@ -11,13 +11,6 @@ export interface DataFromForm {
 	isPined: boolean;
 	color: Color;
 }
-
-export interface InputTypes {
-	inputElement: HTMLInputElement;
-	parentElement: HTMLDivElement;
-	propName: string;
-}
-
 export interface INote {
 	title: string;
 	description: string;

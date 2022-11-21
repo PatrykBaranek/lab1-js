@@ -1,7 +1,6 @@
-import { DataStorage } from '../model/DataStorage.js';
 import { Note } from '../model/Note.js';
-import { Color, DataFromForm, InputTypes } from '../types/types.js';
-import { render as renderNotes } from '../helpers/notes-render.helper.js';
+import { Color, DataFromForm } from '../types/types.js';
+import { render as renderNotes } from './notes-render.helper.js';
 
 // Create render method which show pop-up component with adding or editing note inputs
 
@@ -64,18 +63,17 @@ const renderAllFields: fieldsRender = () => {
 		const inputElement = document.createElement('input');
 		const labelElmenet = document.createElement('label');
 
-		const colorInputs = renderInputs({
-			inputElement: inputElement,
-			parentElement: divElement,
-			propName: propName,
-		}) as HTMLInputElement[];
+		const colorSelectElement = renderColorSelectElement();
 
 		formElement.appendChild(divElement);
 		divElement.appendChild(labelElmenet);
 		if (propName === 'color') {
-			divElement.append(...colorInputs);
-		} else {
+			divElement.append(colorSelectElement);
+		} else if (propName === 'isPined') {
+			inputElement.type = 'checkbox';
 			divElement.append(inputElement);
+		} else {
+			divElement.appendChild(inputElement);
 		}
 
 		divElement.classList.add(`div-${propName}`);
@@ -86,45 +84,29 @@ const renderAllFields: fieldsRender = () => {
 		inputElement.name = `${propName}`;
 		inputElement.id = `${propName}`;
 		inputElement.setAttribute('required', 'required');
-		labelElmenet.textContent = propName + ' : ';
+		labelElmenet.textContent = propName + '  ';
 		labelElmenet.setAttribute('for', `${propName}`);
 	});
 
 	return formElement;
 };
 
-type inputTypeRender = (data: InputTypes) => HTMLElement[] | undefined;
+type RenderColorElementFunc = () => HTMLSelectElement;
 
-const renderInputs: inputTypeRender = (data: InputTypes) => {
-	switch (data.propName) {
-		case 'color':
-			const colorInputArray: HTMLElement[] = [];
-			const colorKeyArray = Object.keys(Color);
-			for (let i = 0; i < colorKeyArray.length; i++) {
-				const inputLabelContainer = document.createElement('div');
-				const newInputElement = document.createElement('input');
-				const newSpanElement = document.createElement('span');
+const renderColorSelectElement: RenderColorElementFunc = () => {
+	const colorKeyArray = Object.keys(Color);
+	const selectElement = document.createElement('select') as HTMLSelectElement;
 
-				inputLabelContainer.classList.add(
-					'color-input-label-container',
-					`input-label-${colorKeyArray[i].toLowerCase()}`
-				);
+	selectElement.id = 'color';
+	for (let i = 0; i < colorKeyArray.length; i++) {
+		const optionElement = document.createElement('option') as HTMLOptionElement;
 
-				newInputElement.classList.add('input-color');
-				newInputElement.type = 'checkbox';
-				newInputElement.id = `${colorKeyArray[i]}`;
-				newInputElement.name = 'color';
-				newInputElement.setAttribute('required', 'required');
-				newSpanElement.textContent = colorKeyArray[i];
+		optionElement.value = colorKeyArray[i];
+		optionElement.textContent = colorKeyArray[i];
 
-				inputLabelContainer.append(newSpanElement, newInputElement);
-				colorInputArray.push(inputLabelContainer);
-			}
-			return colorInputArray;
-		case 'isPined':
-			data.inputElement.type = 'checkbox';
-			break;
+		selectElement.appendChild(optionElement);
 	}
+	return selectElement;
 };
 
 const closeAddEditForm = () => {
@@ -139,22 +121,19 @@ const postData = (e: Event) => {
 	const description = document.getElementById(
 		'description'
 	) as HTMLInputElement;
-	const colors = [
-		...document.querySelectorAll('.input-color'),
-	] as unknown as HTMLInputElement[];
+	const color = document.querySelector('select') as HTMLSelectElement;
 	const isPined = document.getElementById('isPined') as HTMLInputElement;
 
-	const selectedColor = colors.find((x) => {
-		if (x.checked) {
-			return x.id;
-		}
-	}) as HTMLInputElement;
+	const selectedColor = color.options[color.selectedIndex].text;
 
+	const findColor = Object.values(Color).find(
+		(x) => x === selectedColor
+	) as Color;
 	data = {
 		title: title.value,
 		description: description.value,
 		isPined: isPined.checked,
-		color: Object.values(Color).find((x) => x === selectedColor.id) as Color,
+		color: findColor,
 	};
 
 	const newNote = new Note(
@@ -163,6 +142,8 @@ const postData = (e: Event) => {
 		data.color,
 		data.isPined
 	);
+
+	console.log(newNote);
 
 	newNote.createNewNote();
 

@@ -1,6 +1,6 @@
 import { Note } from '../model/Note.js';
 import { Color } from '../types/types.js';
-import { render as renderNotes } from '../helpers/notes-render.helper.js';
+import { render as renderNotes } from './notes-render.helper.js';
 // Create render method which show pop-up component with adding or editing note inputs
 let data;
 const menuDivContainer = document.querySelector('.menu-container');
@@ -72,6 +72,7 @@ const renderAllFields = () => {
 const renderColorSelectElement = () => {
     const colorKeyArray = Object.keys(Color);
     const selectElement = document.createElement('select');
+    selectElement.id = 'color';
     for (let i = 0; i < colorKeyArray.length; i++) {
         const optionElement = document.createElement('option');
         optionElement.value = colorKeyArray[i];
@@ -88,23 +89,18 @@ const postData = (e) => {
     e.preventDefault();
     const title = document.getElementById('title');
     const description = document.getElementById('description');
-    const colors = [
-        ...document.querySelectorAll('.input-color'),
-    ];
+    const color = document.querySelector('select');
     const isPined = document.getElementById('isPined');
-    const selectedColor = colors.find((x) => {
-        if (x.checked) {
-            return x.id;
-        }
-    });
+    const selectedColor = color.options[color.selectedIndex].text;
+    const findColor = Object.values(Color).find((x) => x === selectedColor);
     data = {
         title: title.value,
         description: description.value,
         isPined: isPined.checked,
-        color: Object.values(Color).find((x) => x === selectedColor.id),
+        color: findColor,
     };
     const newNote = new Note(data.title, data.description, data.color, data.isPined);
     console.log(newNote);
-    // newNote.createNewNote();
+    newNote.createNewNote();
     closeAddEditForm();
 };
