@@ -4,7 +4,6 @@ import { render as renderNotes } from './notes-render.helper.js';
 
 // Create render method which show pop-up component with adding or editing note inputs
 
-let data: DataFromForm;
 const menuDivContainer = document.querySelector(
 	'.menu-container'
 ) as HTMLDivElement;
@@ -21,6 +20,7 @@ export const render = (e: Event) => {
 	const buttonElement = document.createElement('button');
 
 	formElement.id = 'add-form';
+	formElement.method = 'post';
 	closeFormBtn.id = 'close-form-btn';
 	closeFormBtn.innerHTML = '&times;';
 
@@ -100,7 +100,6 @@ const renderColorSelectElement: RenderColorElementFunc = () => {
 	selectElement.id = 'color';
 	for (let i = 0; i < colorKeyArray.length; i++) {
 		const optionElement = document.createElement('option') as HTMLOptionElement;
-
 		optionElement.value = colorKeyArray[i];
 		optionElement.textContent = colorKeyArray[i];
 
@@ -129,7 +128,8 @@ const postData = (e: Event) => {
 	const findColor = Object.values(Color).find(
 		(x) => x === selectedColor
 	) as Color;
-	data = {
+
+	const data: DataFromForm = {
 		title: title.value,
 		description: description.value,
 		isPined: isPined.checked,

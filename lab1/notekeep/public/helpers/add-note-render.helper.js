@@ -2,7 +2,6 @@ import { Note } from '../model/Note.js';
 import { Color } from '../types/types.js';
 import { render as renderNotes } from './notes-render.helper.js';
 // Create render method which show pop-up component with adding or editing note inputs
-let data;
 const menuDivContainer = document.querySelector('.menu-container');
 let divFormContainerElement;
 export const render = (e) => {
@@ -14,6 +13,7 @@ export const render = (e) => {
     const closeFormBtn = document.createElement('button');
     const buttonElement = document.createElement('button');
     formElement.id = 'add-form';
+    formElement.method = 'post';
     closeFormBtn.id = 'close-form-btn';
     closeFormBtn.innerHTML = '&times;';
     divFormContainerElement.classList.add('form-container');
@@ -93,7 +93,7 @@ const postData = (e) => {
     const isPined = document.getElementById('isPined');
     const selectedColor = color.options[color.selectedIndex].text;
     const findColor = Object.values(Color).find((x) => x === selectedColor);
-    data = {
+    const data = {
         title: title.value,
         description: description.value,
         isPined: isPined.checked,
