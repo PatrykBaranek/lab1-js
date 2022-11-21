@@ -25,7 +25,7 @@ export class Note implements INote {
 		const dataStorage = new DataStorage(this);
 		dataStorage.addToLocalStorage();
 
-		return dataStorage.getValue();
+		return DataStorage.getValue(Number(dataStorage.key));
 	}
 
 	public static getAllNotes() {

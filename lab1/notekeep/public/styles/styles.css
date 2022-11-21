@@ -9,6 +9,7 @@ html {
 }
 
 body {
+	position: relative;
 	background-image: linear-gradient(
 		to right top,
 		#090537,
@@ -67,6 +68,7 @@ button {
 	font-size: 1.7rem;
 	border-radius: 20px;
 	box-shadow: 8px 8px 8px;
+	z-index: 999999;
 }
 
 #add-form {
@@ -83,12 +85,13 @@ button {
 .notes-container {
 	margin: 0 auto;
 	min-height: calc(100vh - 100px);
-	width: 1080px;
+	/* width: 1080px; */
+	max-width: 1440px;
 }
 
 .notes {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-content: space-around;
 	flex-wrap: wrap;
 }
@@ -98,6 +101,7 @@ button {
 	position: relative;
 	flex-direction: column;
 	margin-top: 30px;
+	margin-bottom: 20px;
 	padding: 5px;
 	height: 300px;
 	width: 250px;
@@ -105,6 +109,13 @@ button {
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
 		rgba(0, 0, 0, 0.22) 0px 15px 12px;
 	font-size: 2rem;
+	transition: 0.3s;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.note:hover {
+	transform: scale(1.1);
 }
 
 .note .createdAt {
@@ -112,4 +123,13 @@ button {
 	right: 2px;
 	bottom: 2px;
 	font-size: 1.2rem;
+}
+
+.note i {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	height: 50px;
+	width: 50px;
+	color: #333;
 }

@@ -9,7 +9,7 @@ const menuDivContainer = document.querySelector(
 ) as HTMLDivElement;
 let divFormContainerElement: HTMLDivElement;
 
-export const render = (e: Event) => {
+export const render = () => {
 	if (menuDivContainer.hasAttribute('filled')) {
 		return;
 	}
@@ -27,10 +27,7 @@ export const render = (e: Event) => {
 	divFormContainerElement.classList.add('form-container');
 	buttonElement.classList.add(`form-container__btnAdd`);
 
-	if (e.target instanceof HTMLButtonElement) {
-		const buttonType = e.target.textContent;
-		buttonElement.textContent = buttonType;
-	}
+	buttonElement.textContent = 'Save Note';
 
 	menuDivContainer.appendChild(divFormContainerElement);
 	divFormContainerElement.appendChild(closeFormBtn);

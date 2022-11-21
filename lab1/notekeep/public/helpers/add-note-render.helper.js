@@ -4,7 +4,7 @@ import { render as renderNotes } from './notes-render.helper.js';
 // Create render method which show pop-up component with adding or editing note inputs
 const menuDivContainer = document.querySelector('.menu-container');
 let divFormContainerElement;
-export const render = (e) => {
+export const render = () => {
     if (menuDivContainer.hasAttribute('filled')) {
         return;
     }
@@ -18,10 +18,7 @@ export const render = (e) => {
     closeFormBtn.innerHTML = '&times;';
     divFormContainerElement.classList.add('form-container');
     buttonElement.classList.add(`form-container__btnAdd`);
-    if (e.target instanceof HTMLButtonElement) {
-        const buttonType = e.target.textContent;
-        buttonElement.textContent = buttonType;
-    }
+    buttonElement.textContent = 'Save Note';
     menuDivContainer.appendChild(divFormContainerElement);
     divFormContainerElement.appendChild(closeFormBtn);
     divFormContainerElement.appendChild(formElement);

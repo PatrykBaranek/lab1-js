@@ -5,11 +5,13 @@ let notesContainerElement = document.querySelector('.notes') as HTMLDivElement;
 const dateArr: string[] = [];
 
 export const render = () => {
-	const notes: INote[] = Note.getAllNotes().map<INote>((x) => JSON.parse(x));
+	let notes: INote[] = Note.getAllNotes().map<INote>((x) => JSON.parse(x));
 
-	const notesToRender = notes.filter((val) => !dateArr.includes(val.createdAt));
+	if (notes.length !== 0) {
+		notes = notes.filter((val) => !dateArr.includes(val.createdAt));
+	}
 
-	notesToRender.forEach((note, index) => {
+	notes.forEach((note, index) => {
 		const divElement = document.createElement('div');
 		const titleSpan = document.createElement('span');
 		titleSpan.classList.add('title');
@@ -29,6 +31,4 @@ export const render = () => {
 		divElement.append(titleSpan, descriptionSpan, createdAtSpan);
 		notesContainerElement.append(divElement);
 	});
-
-	console.log(notes);
 };

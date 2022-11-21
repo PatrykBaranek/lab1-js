@@ -1,30 +1,30 @@
 import { Note } from './Note.js';
 
 export class DataStorage {
-	private key: string;
+	public key: string;
 	private value: string;
 
-	constructor(value: Note) {
+	constructor(note: Note) {
 		this.key = String(localStorage.length);
-		this.value = JSON.stringify(value);
+		this.value = JSON.stringify(note);
 	}
 
 	public addToLocalStorage() {
 		localStorage.setItem(this.key, this.value);
 	}
 
-	public getValue() {
-		return localStorage.getItem(this.key);
+	public static getValue(index: number) {
+		return localStorage.getItem(index.toString());
 	}
 
-	public RemoveItem() {
-		localStorage.removeItem(this.key);
+	public static RemoveItem(index: number) {
+		localStorage.removeItem(index.toString());
 	}
 
 	public static getAllValues() {
 		const notes: string[] = [];
 		for (let i = 1; i < localStorage.length; i++) {
-			notes.push(localStorage.getItem(String(i)) as string);
+			notes.push(localStorage.getItem(i.toString()) as string);
 		}
 		return notes;
 	}
@@ -34,8 +34,8 @@ export class DataStorage {
 	}
 
 	public static RemoveItemWithKey(key: number) {
-		if (localStorage.getItem(String(key))) {
-			localStorage.removeItem(String(key));
+		if (localStorage.getItem(key.toString())) {
+			localStorage.removeItem(key.toString());
 		}
 
 		return 'Not Found Item';

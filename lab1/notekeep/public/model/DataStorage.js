@@ -1,21 +1,21 @@
 export class DataStorage {
-    constructor(value) {
+    constructor(note) {
         this.key = String(localStorage.length);
-        this.value = JSON.stringify(value);
+        this.value = JSON.stringify(note);
     }
     addToLocalStorage() {
         localStorage.setItem(this.key, this.value);
     }
-    getValue() {
-        return localStorage.getItem(this.key);
+    static getValue(index) {
+        return localStorage.getItem(index.toString());
     }
-    RemoveItem() {
-        localStorage.removeItem(this.key);
+    static RemoveItem(index) {
+        localStorage.removeItem(index.toString());
     }
     static getAllValues() {
         const notes = [];
         for (let i = 1; i < localStorage.length; i++) {
-            notes.push(localStorage.getItem(String(i)));
+            notes.push(localStorage.getItem(i.toString()));
         }
         return notes;
     }
@@ -23,8 +23,8 @@ export class DataStorage {
         localStorage.clear();
     }
     static RemoveItemWithKey(key) {
-        if (localStorage.getItem(String(key))) {
-            localStorage.removeItem(String(key));
+        if (localStorage.getItem(key.toString())) {
+            localStorage.removeItem(key.toString());
         }
         return 'Not Found Item';
     }

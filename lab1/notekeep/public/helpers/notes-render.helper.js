@@ -2,9 +2,11 @@ import { Note } from '../model/Note.js';
 let notesContainerElement = document.querySelector('.notes');
 const dateArr = [];
 export const render = () => {
-    const notes = Note.getAllNotes().map((x) => JSON.parse(x));
-    const notesToRender = notes.filter((val) => !dateArr.includes(val.createdAt));
-    notesToRender.forEach((note, index) => {
+    let notes = Note.getAllNotes().map((x) => JSON.parse(x));
+    if (notes.length !== 0) {
+        notes = notes.filter((val) => !dateArr.includes(val.createdAt));
+    }
+    notes.forEach((note, index) => {
         const divElement = document.createElement('div');
         const titleSpan = document.createElement('span');
         titleSpan.classList.add('title');
@@ -22,5 +24,4 @@ export const render = () => {
         divElement.append(titleSpan, descriptionSpan, createdAtSpan);
         notesContainerElement.append(divElement);
     });
-    console.log(notes);
 };

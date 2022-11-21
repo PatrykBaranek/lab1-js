@@ -10,7 +10,7 @@ export class Note {
     createNewNote() {
         const dataStorage = new DataStorage(this);
         dataStorage.addToLocalStorage();
-        return dataStorage.getValue();
+        return DataStorage.getValue(Number(dataStorage.key));
     }
     static getAllNotes() {
         const notes = DataStorage.getAllValues();
