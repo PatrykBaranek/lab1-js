@@ -117,6 +117,7 @@ button {
 	justify-content: space-around;
 	align-content: space-around;
 	flex-wrap: wrap;
+	gap: 4.5rem;
 }
 
 .note {
