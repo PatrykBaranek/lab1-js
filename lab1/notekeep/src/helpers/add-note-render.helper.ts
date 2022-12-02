@@ -14,12 +14,11 @@ export const render: () => void = () => {
 		return;
 	}
 
-	// <div>
 	divFormContainerElement = document.createElement('div');
 	const closeFormBtn = document.createElement('button');
 
 	const formElement = renderAllFields();
-	const buttonElement = document.createElement('button');
+	const addButtonElement = document.createElement('button');
 
 	formElement.id = 'add-form';
 	formElement.method = 'post';
@@ -27,19 +26,19 @@ export const render: () => void = () => {
 	closeFormBtn.innerHTML = '&times;';
 
 	divFormContainerElement.classList.add('form-container');
-	buttonElement.classList.add(`form-container__btnAdd`);
+	addButtonElement.classList.add(`form-container__btnAdd`);
 
-	buttonElement.textContent = 'Save Note';
+	addButtonElement.textContent = 'Save Note';
 
 	menuDivContainer.appendChild(divFormContainerElement);
 	divFormContainerElement.appendChild(closeFormBtn);
 	divFormContainerElement.appendChild(formElement);
-	formElement.appendChild(buttonElement);
+	formElement.appendChild(addButtonElement);
 
 	menuDivContainer.setAttribute('filled', String(true));
 
 	closeFormBtn.addEventListener('click', closeAddEditForm);
-	buttonElement.addEventListener('click', (e: Event) => {
+	addButtonElement.addEventListener('click', (e: Event) => {
 		postData(e);
 		renderNotes();
 	});
@@ -108,7 +107,7 @@ const closeAddEditForm: () => void = () => {
 	divFormContainerElement.remove();
 };
 
-const postData = (e: Event) => {
+const postData: (e: Event) => void = (e: Event) => {
 	e.preventDefault();
 
 	const title = document.getElementById('title') as HTMLInputElement;

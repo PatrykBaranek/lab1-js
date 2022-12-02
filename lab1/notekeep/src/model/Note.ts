@@ -22,14 +22,15 @@ export class Note implements INote {
 	}
 
 	public createNewNote() {
-		const dataStorage = new DataStorage(this);
-		dataStorage.addToLocalStorage();
-
-		return DataStorage.getValue(Number(dataStorage.key));
+		return DataStorage.addToLocalStorage(this);
 	}
 
 	public static getAllNotes() {
 		const notes = DataStorage.getAllValues();
 		return notes;
+	}
+
+	public static deleteNoteById(createdAt: string) {
+		DataStorage.RemoveItemById(createdAt);
 	}
 }

@@ -8,25 +8,24 @@ export const render = () => {
     if (menuDivContainer.hasAttribute('filled')) {
         return;
     }
-    // <div>
     divFormContainerElement = document.createElement('div');
     const closeFormBtn = document.createElement('button');
     const formElement = renderAllFields();
-    const buttonElement = document.createElement('button');
+    const addButtonElement = document.createElement('button');
     formElement.id = 'add-form';
     formElement.method = 'post';
     closeFormBtn.id = 'close-form-btn';
     closeFormBtn.innerHTML = '&times;';
     divFormContainerElement.classList.add('form-container');
-    buttonElement.classList.add(`form-container__btnAdd`);
-    buttonElement.textContent = 'Save Note';
+    addButtonElement.classList.add(`form-container__btnAdd`);
+    addButtonElement.textContent = 'Save Note';
     menuDivContainer.appendChild(divFormContainerElement);
     divFormContainerElement.appendChild(closeFormBtn);
     divFormContainerElement.appendChild(formElement);
-    formElement.appendChild(buttonElement);
+    formElement.appendChild(addButtonElement);
     menuDivContainer.setAttribute('filled', String(true));
     closeFormBtn.addEventListener('click', closeAddEditForm);
-    buttonElement.addEventListener('click', (e) => {
+    addButtonElement.addEventListener('click', (e) => {
         postData(e);
         renderNotes();
     });

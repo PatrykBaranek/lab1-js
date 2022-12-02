@@ -1,16 +1,15 @@
 export class DataStorage {
-    constructor(note) {
-        this.key = String(localStorage.length);
-        this.value = JSON.stringify(note);
-    }
-    addToLocalStorage() {
-        localStorage.setItem(this.key, this.value);
-    }
-    static getValue(index) {
-        return localStorage.getItem(index.toString());
-    }
-    static RemoveItem(index) {
-        localStorage.removeItem(index.toString());
+    static addToLocalStorage(note) {
+        let key;
+        let exist = false;
+        while (exist) {
+            key = Math.floor(Math.random() * 1000);
+            if (localStorage.getItem(key.toString())) {
+                exist = true;
+                localStorage.setItem(key.toString(), JSON.stringify(note));
+                return key;
+            }
+        }
     }
     static getAllValues() {
         const notes = [];
@@ -22,10 +21,10 @@ export class DataStorage {
     static RemoveAll() {
         localStorage.clear();
     }
-    static RemoveItemWithKey(key) {
-        if (localStorage.getItem(key.toString())) {
-            localStorage.removeItem(key.toString());
+    static RemoveItemById(createdAt) {
+        if (localStorage.getItem(createdAt)) {
+            localStorage.removeItem(createdAt);
         }
-        return 'Not Found Item';
+        return console.error('Not Found Item');
     }
 }

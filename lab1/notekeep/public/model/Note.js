@@ -8,12 +8,13 @@ export class Note {
         this.createdAt = new Date().toLocaleString();
     }
     createNewNote() {
-        const dataStorage = new DataStorage(this);
-        dataStorage.addToLocalStorage();
-        return DataStorage.getValue(Number(dataStorage.key));
+        return DataStorage.addToLocalStorage(this);
     }
     static getAllNotes() {
         const notes = DataStorage.getAllValues();
         return notes;
+    }
+    static deleteNoteById(createdAt) {
+        DataStorage.RemoveItemById(createdAt);
     }
 }

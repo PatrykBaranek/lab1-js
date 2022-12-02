@@ -1,24 +1,18 @@
-import { Note } from './Note.js';
+import { INote } from '../types/types';
 
 export class DataStorage {
-	public key: string;
-	private value: string;
+	public static addToLocalStorage(note: INote) {
+		let key: number;
+		let exist: boolean = false;
 
-	constructor(note: Note) {
-		this.key = String(localStorage.length);
-		this.value = JSON.stringify(note);
-	}
-
-	public addToLocalStorage() {
-		localStorage.setItem(this.key, this.value);
-	}
-
-	public static getValue(index: number) {
-		return localStorage.getItem(index.toString());
-	}
-
-	public static RemoveItem(index: number) {
-		localStorage.removeItem(index.toString());
+		while (exist) {
+			key = Math.floor(Math.random() * 1000);
+			if (localStorage.getItem(key.toString())) {
+				exist = true;
+				localStorage.setItem(key.toString(), JSON.stringify(note));
+				return key;
+			}
+		}
 	}
 
 	public static getAllValues() {
@@ -33,11 +27,11 @@ export class DataStorage {
 		localStorage.clear();
 	}
 
-	public static RemoveItemWithKey(key: number) {
-		if (localStorage.getItem(key.toString())) {
-			localStorage.removeItem(key.toString());
+	public static RemoveItemById(createdAt: string) {
+		if (localStorage.getItem(createdAt)) {
+			localStorage.removeItem(createdAt);
 		}
 
-		return 'Not Found Item';
+		return console.error('Not Found Item');
 	}
 }

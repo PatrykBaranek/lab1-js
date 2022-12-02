@@ -1,8 +1,6 @@
-import { DataStorage } from '../model/DataStorage.js';
+import { Note } from '../model/Note.js';
 export const editNoteForm = (e) => {
     if (e.target instanceof HTMLDivElement) {
-        console.log(e.target);
-        console.log(DataStorage.getValue(Number(e.target.id) + 1));
         const title = e.target.querySelector('.title');
         const description = e.target.querySelector('.description');
         const createdAt = e.target.querySelector('.createdAt');
@@ -20,19 +18,23 @@ export const editNoteForm = (e) => {
                 (_a = e.target.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
             }
         });
-        deleteBtn.addEventListener('click', () => console.log('delete'));
+        deleteBtn.addEventListener('click', () => {
+            Note.deleteNoteById(createdAt.textContent);
+        });
     }
 };
 const handleDetails = (dataToDisplay) => {
     const buttonsDivElement = document.createElement('div');
     buttonsDivElement.classList.add('buttons-details-container');
     const closeDetailsBtn = document.createElement('button');
-    const deleteNoteBtn = document.createElement('button');
-    const editNoteBtn = document.createElement('button');
     closeDetailsBtn.innerHTML = '&times;';
     closeDetailsBtn.classList.add('close-details-btn');
+    const deleteNoteBtn = document.createElement('button');
     deleteNoteBtn.textContent = 'Delete Note';
+    deleteNoteBtn.classList.add('delete-note-btn');
+    const editNoteBtn = document.createElement('button');
     editNoteBtn.textContent = 'Edit Note';
+    editNoteBtn.classList.add('edit-note-btn');
     const detailsContainerElement = document.createElement('div');
     detailsContainerElement.classList.add('details-container');
     const { titleElement, descriptionElement } = createHtmlElementsForData(dataToDisplay);
