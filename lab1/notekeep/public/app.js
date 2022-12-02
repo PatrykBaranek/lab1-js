@@ -1,5 +1,5 @@
-import { render as renderNoteForm } from './helpers/add-note-render.helper.js';
 import { editNoteForm } from './helpers/editNoteForm.js';
+import { render as renderNoteForm } from './helpers/add-note-render.helper.js';
 import { render as renderNotes } from './helpers/notes-render.helper.js';
 renderNotes();
 const addNoteBtnElement = document.querySelector('#open-add-form');

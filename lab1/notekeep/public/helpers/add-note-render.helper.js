@@ -8,9 +8,10 @@ export const render = () => {
     if (menuDivContainer.hasAttribute('filled')) {
         return;
     }
+    // <div>
     divFormContainerElement = document.createElement('div');
-    const formElement = renderAllFields();
     const closeFormBtn = document.createElement('button');
+    const formElement = renderAllFields();
     const buttonElement = document.createElement('button');
     formElement.id = 'add-form';
     formElement.method = 'post';

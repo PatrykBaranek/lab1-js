@@ -9,14 +9,16 @@ const menuDivContainer = document.querySelector(
 ) as HTMLDivElement;
 let divFormContainerElement: HTMLDivElement;
 
-export const render = () => {
+export const render: () => void = () => {
 	if (menuDivContainer.hasAttribute('filled')) {
 		return;
 	}
 
+	// <div>
 	divFormContainerElement = document.createElement('div');
-	const formElement = renderAllFields();
 	const closeFormBtn = document.createElement('button');
+
+	const formElement = renderAllFields();
 	const buttonElement = document.createElement('button');
 
 	formElement.id = 'add-form';
@@ -43,9 +45,7 @@ export const render = () => {
 	});
 };
 
-type fieldsRender = () => HTMLFormElement;
-
-const renderAllFields: fieldsRender = () => {
+const renderAllFields: () => HTMLFormElement = () => {
 	const noteInstance = new Note('test', 'descripiton', Color.BLUE, true);
 	const noteProps = Object.getOwnPropertyNames(noteInstance);
 
@@ -88,9 +88,7 @@ const renderAllFields: fieldsRender = () => {
 	return formElement;
 };
 
-type RenderColorElementFunc = () => HTMLSelectElement;
-
-const renderColorSelectElement: RenderColorElementFunc = () => {
+const renderColorSelectElement: () => HTMLSelectElement = () => {
 	const colorKeyArray = Object.keys(Color);
 	const selectElement = document.createElement('select') as HTMLSelectElement;
 
@@ -105,7 +103,7 @@ const renderColorSelectElement: RenderColorElementFunc = () => {
 	return selectElement;
 };
 
-const closeAddEditForm = () => {
+const closeAddEditForm: () => void = () => {
 	menuDivContainer.removeAttribute('filled');
 	divFormContainerElement.remove();
 };
