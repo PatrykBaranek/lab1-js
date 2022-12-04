@@ -1,13 +1,16 @@
-import { Note } from '../model/Note.js';
-import { INote } from '../types/types.js';
+import { DataStorage } from '../../model/DataStorage.js';
+import { Note } from '../../model/Note.js';
+import { Color, colorTuple, INote } from '../../types/types.js';
 
 let notesContainerElement = document.querySelector('.notes') as HTMLDivElement;
 const dateArr: string[] = [];
 
 export const render = () => {
+	console.log(DataStorage.getAllValues());
+	console.log(dateArr.length);
 	let notes: INote[] = Note.getAllNotes().map<INote>((x) => JSON.parse(x));
 
-	if (notes.length !== 0) {
+	if (dateArr.length !== 0 && notes.length !== 0) {
 		notes = notes.filter((val) => !dateArr.includes(val.createdAt));
 	}
 
@@ -23,7 +26,7 @@ export const render = () => {
 		const createdAtSpan = document.createElement('span');
 		createdAtSpan.classList.add('createdAt');
 
-		divElement.style.backgroundColor = note.color;
+		divElement.style.backgroundColor = getColor(note.color);
 		divElement.id = String(index);
 		divElement.classList.add('note');
 
@@ -35,4 +38,8 @@ export const render = () => {
 		divElement.append(titleSpan, descriptionSpan, createdAtSpan);
 		notesContainerElement.append(divElement);
 	});
+};
+
+const getColor = (color: Color) => {
+	return colorTuple[Object.values(Color).indexOf(color)][1];
 };

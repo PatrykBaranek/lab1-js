@@ -1,4 +1,4 @@
-import { Note } from '../model/Note.js';
+import { Note } from '../../model/Note.js';
 export const editNoteForm = (e) => {
     if (e.target instanceof HTMLDivElement) {
         const title = e.target.querySelector('.title');

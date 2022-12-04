@@ -17,6 +17,60 @@
 				<div class="notes-done"></div>
 			</div>
 		</div>
+
+		<div class="add-form-container hide">
+			<button id="close-form-btn">&times;</button>
+			<form class="add-form" method="post">
+				<div class="div-title">
+					<label class="label-title" for="title">Title</label>
+					<input class="input-title" id="title" name="title" type="text" />
+				</div>
+				<div class="div-description">
+					<label class="label-description" for="description">Description</label>
+					<input
+						class="input-description"
+						id="description"
+						name="description"
+						type="text"
+					/>
+				</div>
+				<div class="div-color">
+					<label class="label-color" for="color">Color</label>
+					<select name="color" id="color">
+						<option value="red">RED</option>
+						<option value="green">GREEN</option>
+						<option value="blue">BLUE</option>
+						<option value="yellow">YELLOW</option>
+					</select>
+				</div>
+				<div class="div-isPined">
+					<label class="label-isPined" for="isPined">Pin? </label>
+					<input
+						class="input-isPined"
+						type="checkbox"
+						name="isPined"
+						id="isPined"
+						required
+					/>
+				</div>
+				<button class="add-form__add-btn">Save Note</button>
+			</form>
+		</div>
+
+		<div class="details-container hide">
+			<button class="close-details-btn">&times;</button>
+			<div class="title-details-container">
+				<p class="title-details"></p>
+			</div>
+			<div class="description-details-container">
+				<p class="description-details"></p>
+			</div>
+			<div class="buttons-details-container">
+				<button class="delete-note-btn">Delete Note</button>
+				<button class="edit-note-btn">Edit Note</button>
+			</div>
+		</div>
+
 		<script type="module" src="./public/app.js"></script>
 	</body>
 </html>

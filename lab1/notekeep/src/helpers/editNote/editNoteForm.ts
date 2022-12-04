@@ -1,4 +1,4 @@
-import { Note } from '../model/Note.js';
+import { Note } from '../../model/Note.js';
 
 export const editNoteForm = (e: Event) => {
 	if (e.target instanceof HTMLDivElement) {

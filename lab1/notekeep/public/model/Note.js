@@ -1,6 +1,7 @@
 import { DataStorage } from './DataStorage.js';
 export class Note {
-    constructor(title, description, color, isPined) {
+    constructor(id, title, description, color, isPined) {
+        this.id = '';
         this.title = title;
         this.description = description;
         this.color = color;
@@ -8,7 +9,8 @@ export class Note {
         this.createdAt = new Date().toLocaleString();
     }
     createNewNote() {
-        return DataStorage.addToLocalStorage(this);
+        this.id = DataStorage.addToLocalStorage(this);
+        return this.id;
     }
     static getAllNotes() {
         const notes = DataStorage.getAllValues();

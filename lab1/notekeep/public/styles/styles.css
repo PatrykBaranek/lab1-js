@@ -4,6 +4,10 @@
 	padding: 0;
 }
 
+.hide {
+	display: none;
+}
+
 .blur {
 	position: absolute;
 	top: 0;
@@ -86,7 +90,7 @@ button {
 	color: red;
 }
 
-.form-container {
+.add-form-container {
 	padding: 20px;
 	position: fixed;
 	top: 50%;
@@ -101,14 +105,14 @@ button {
 	z-index: 999999;
 }
 
-#add-form {
+.add-form {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	height: 100%;
 }
 
-#add-form > div {
+.add-form > div {
 	margin: 0 auto;
 }
 
@@ -167,7 +171,7 @@ button {
 
 .details-container {
 	position: fixed;
-	display: flex;
+	/* display: flex; */
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;

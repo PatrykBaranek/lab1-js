@@ -1,24 +1,21 @@
 import { INote } from '../types/types';
 
 export class DataStorage {
+	// !!! Performance issue
 	public static addToLocalStorage(note: INote) {
-		let key: number;
-		let exist: boolean = false;
+		let key = localStorage.length;
 
-		while (exist) {
-			key = Math.floor(Math.random() * 1000);
-			if (localStorage.getItem(key.toString())) {
-				exist = true;
-				localStorage.setItem(key.toString(), JSON.stringify(note));
-				return key;
-			}
+		if (!localStorage.key(key)) {
+			localStorage.setItem(String(key), JSON.stringify(note));
 		}
+
+		return key;
 	}
 
 	public static getAllValues() {
 		const notes: string[] = [];
 		for (let i = 1; i < localStorage.length; i++) {
-			notes.push(localStorage.getItem(i.toString()) as string);
+			notes.push(localStorage.getItem(localStorage.key(i) as string) as string);
 		}
 		return notes;
 	}

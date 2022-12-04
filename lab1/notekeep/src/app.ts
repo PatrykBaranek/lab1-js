@@ -1,6 +1,6 @@
-import { editNoteForm } from './helpers/editNoteForm.js';
-import { render as renderNoteForm } from './helpers/add-note-render.helper.js';
-import { render as renderNotes } from './helpers/notes-render.helper.js';
+import { editNoteForm } from './helpers/editNote/editNoteForm.js';
+import { showAddForm } from './helpers/addNote/add-note-render.helper.js';
+import { render as renderNotes } from './helpers/renderNotes/notes-render.helper.js';
 
 renderNotes();
 
@@ -12,7 +12,7 @@ const editNoteDivElements = [
 	...document.querySelectorAll('.note'),
 ] as HTMLDivElement[];
 
-addNoteBtnElement.addEventListener('click', renderNoteForm);
+addNoteBtnElement.addEventListener('click', showAddForm);
 
 editNoteDivElements.forEach((noteDiv) => {
 	noteDiv.addEventListener('click', editNoteForm);

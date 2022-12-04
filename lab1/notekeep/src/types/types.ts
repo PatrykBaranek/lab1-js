@@ -1,9 +1,16 @@
 export enum Color {
-	RED = 'RED',
-	BLUE = 'BLUE',
-	YELLOW = 'YELLOW',
-	GREEN = 'GREEN',
+	RED = 0,
+	BLUE = 1,
+	YELLOW = 2,
+	GREEN = 3,
 }
+
+export const colorTuple: [string, string][] = [
+	['RED', '#f2493a'],
+	['BLUE', '#3959f7'],
+	['YELLOW', '#eff545'],
+	['GREEN', '#4df752'],
+];
 
 export interface DataFromForm {
 	title: string;
@@ -12,6 +19,7 @@ export interface DataFromForm {
 	color: Color;
 }
 export interface INote {
+	id?: string;
 	title: string;
 	description: string;
 	color: Color;

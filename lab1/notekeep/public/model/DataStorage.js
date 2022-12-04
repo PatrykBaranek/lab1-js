@@ -1,20 +1,16 @@
 export class DataStorage {
+    // !!! Performance issue
     static addToLocalStorage(note) {
-        let key;
-        let exist = false;
-        while (exist) {
-            key = Math.floor(Math.random() * 1000);
-            if (localStorage.getItem(key.toString())) {
-                exist = true;
-                localStorage.setItem(key.toString(), JSON.stringify(note));
-                return key;
-            }
+        let key = localStorage.length;
+        if (!localStorage.key(key)) {
+            localStorage.setItem(String(key), JSON.stringify(note));
         }
+        return key;
     }
     static getAllValues() {
         const notes = [];
         for (let i = 1; i < localStorage.length; i++) {
-            notes.push(localStorage.getItem(i.toString()));
+            notes.push(localStorage.getItem(localStorage.key(i)));
         }
         return notes;
     }
