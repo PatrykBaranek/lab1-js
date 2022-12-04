@@ -12,6 +12,10 @@ export const colorTuple: [string, string][] = [
 	['GREEN', '#4df752'],
 ];
 
+export const getColor = (color: Color) => {
+	return colorTuple[Object.values(Color).indexOf(color)][1];
+};
+
 export interface DataFromForm {
 	title: string;
 	description: string;
@@ -19,7 +23,6 @@ export interface DataFromForm {
 	color: Color;
 }
 export interface INote {
-	id?: string;
 	title: string;
 	description: string;
 	color: Color;

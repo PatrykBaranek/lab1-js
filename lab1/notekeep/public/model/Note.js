@@ -1,7 +1,6 @@
 import { DataStorage } from './DataStorage.js';
 export class Note {
-    constructor(id, title, description, color, isPined) {
-        this.id = '';
+    constructor(title, description, color, isPined) {
         this.title = title;
         this.description = description;
         this.color = color;
@@ -9,8 +8,7 @@ export class Note {
         this.createdAt = new Date().toLocaleString();
     }
     createNewNote() {
-        this.id = DataStorage.addToLocalStorage(this);
-        return this.id;
+        DataStorage.addToLocalStorage(this);
     }
     static getAllNotes() {
         const notes = DataStorage.getAllValues();
@@ -18,5 +16,6 @@ export class Note {
     }
     static deleteNoteById(createdAt) {
         DataStorage.RemoveItemById(createdAt);
+        location.reload();
     }
 }

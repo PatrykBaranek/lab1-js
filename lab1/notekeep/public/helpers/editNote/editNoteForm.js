@@ -13,14 +13,18 @@ export const editNoteForm = (e) => {
             console.log('edit');
         });
         closeBtn.addEventListener('click', (e) => {
-            var _a;
-            if (e.target instanceof HTMLButtonElement) {
-                (_a = e.target.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
-            }
+            closeEditForm(e);
         });
         deleteBtn.addEventListener('click', () => {
             Note.deleteNoteById(createdAt.textContent);
+            closeEditForm(e);
         });
+    }
+};
+const closeEditForm = (e) => {
+    var _a;
+    if (e.target instanceof HTMLButtonElement) {
+        (_a = e.target.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
     }
 };
 const handleDetails = (dataToDisplay) => {
@@ -48,10 +52,6 @@ const handleDetails = (dataToDisplay) => {
     };
     return buttons;
 };
-// <div class="title-details-container">
-// 	<p class="title-details">title text</p>
-// </div>
-// <div>
 const createHtmlElementsForData = (dataToDisplay) => {
     const titleDivElement = document.createElement('div');
     const titleElement = document.createElement('p');

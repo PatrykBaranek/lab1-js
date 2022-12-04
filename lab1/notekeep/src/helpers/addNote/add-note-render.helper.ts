@@ -1,4 +1,3 @@
-import { render as renderNotes } from '../renderNotes/notes-render.helper.js';
 import { postData } from './postData.js';
 
 const divFormContainerElement = document.querySelector(
@@ -21,7 +20,7 @@ export const showAddForm: () => void = () => {
 	closeFormBtn.addEventListener('click', closeAddForm);
 	addButtonElement.addEventListener('click', (e: Event) => {
 		postData(e);
-		renderNotes();
+		location.reload();
 	});
 };
 

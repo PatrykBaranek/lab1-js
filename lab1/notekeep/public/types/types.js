@@ -11,3 +11,6 @@ export const colorTuple = [
     ['YELLOW', '#eff545'],
     ['GREEN', '#4df752'],
 ];
+export const getColor = (color) => {
+    return colorTuple[Object.values(Color).indexOf(color)][1];
+};

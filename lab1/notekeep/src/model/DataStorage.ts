@@ -1,20 +1,15 @@
 import { INote } from '../types/types';
 
 export class DataStorage {
-	// !!! Performance issue
 	public static addToLocalStorage(note: INote) {
-		let key = localStorage.length;
-
-		if (!localStorage.key(key)) {
-			localStorage.setItem(String(key), JSON.stringify(note));
-		}
-
+		let key = note.createdAt;
+		localStorage.setItem(key, JSON.stringify(note));
 		return key;
 	}
 
 	public static getAllValues() {
 		const notes: string[] = [];
-		for (let i = 1; i < localStorage.length; i++) {
+		for (let i = 0; i < localStorage.length; i++) {
 			notes.push(localStorage.getItem(localStorage.key(i) as string) as string);
 		}
 		return notes;

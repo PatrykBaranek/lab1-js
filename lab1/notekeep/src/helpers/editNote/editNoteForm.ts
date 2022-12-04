@@ -18,14 +18,19 @@ export const editNoteForm = (e: Event) => {
 		});
 
 		closeBtn.addEventListener('click', (e: Event) => {
-			if (e.target instanceof HTMLButtonElement) {
-				e.target.parentElement?.remove();
-			}
+			closeEditForm(e);
 		});
 
 		deleteBtn.addEventListener('click', () => {
 			Note.deleteNoteById(createdAt.textContent as string);
+			closeEditForm(e);
 		});
+	}
+};
+
+const closeEditForm = (e: Event) => {
+	if (e.target instanceof HTMLButtonElement) {
+		e.target.parentElement?.remove();
 	}
 };
 
@@ -83,11 +88,6 @@ const handleDetails: (dataToDisplay: detailsTypes) => createdButtonsTypes = (
 
 	return buttons;
 };
-
-// <div class="title-details-container">
-// 	<p class="title-details">title text</p>
-// </div>
-// <div>
 
 const createHtmlElementsForData: (dataToDisplay: detailsTypes) => {
 	titleElement: HTMLDivElement;

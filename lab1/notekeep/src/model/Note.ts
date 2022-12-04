@@ -2,7 +2,6 @@ import { Color, INote } from '../types/types.js';
 import { DataStorage } from './DataStorage.js';
 
 export class Note implements INote {
-	public id: string;
 	public title: string;
 	public description: string;
 	public color: Color;
@@ -10,13 +9,11 @@ export class Note implements INote {
 	public createdAt: string;
 
 	constructor(
-		id: string,
 		title: string,
 		description: string,
 		color: Color,
 		isPined: boolean
 	) {
-		this.id = '';
 		this.title = title;
 		this.description = description;
 		this.color = color;
@@ -25,8 +22,7 @@ export class Note implements INote {
 	}
 
 	public createNewNote() {
-		this.id = DataStorage.addToLocalStorage(this) as unknown as string;
-		return this.id;
+		DataStorage.addToLocalStorage(this) as unknown as string;
 	}
 
 	public static getAllNotes() {
@@ -36,5 +32,6 @@ export class Note implements INote {
 
 	public static deleteNoteById(createdAt: string) {
 		DataStorage.RemoveItemById(createdAt);
+		location.reload();
 	}
 }
